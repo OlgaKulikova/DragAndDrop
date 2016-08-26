@@ -6,8 +6,8 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="stylesheet" type="text/css" href="style.css">
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 
     <script type="text/javascript">
 
@@ -21,28 +21,34 @@
             var numbers = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
 
             for ( var i=0; i<10; i++ ) {
-                $('<div>' + numbers[i] + '</div>').data( 'number', numbers[i] ).attr( 'id', 'card'+numbers[i] ).appendTo( '#cardPile' ).draggable( {
-                    containment: '#content',
-                    stack: '#cardPile div',
-                    cursor: 'move',
-                    revert: true,
-                    helper: 'clone'
-                } );
+                $('<div>' + numbers[i] + '</div>').data( 'number', numbers[i] )
+                    .attr( 'id', 'card'+numbers[i] )
+                    .appendTo( '#cardPile' ).draggable( {
+                        containment: '#content',
+                        stack: '#cardPile div',
+                        cursor: 'move',
+                        revert: true,
+                        helper: 'clone'
+                });
             }
 
-            //var board = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]];
+
+
             var size = 5;
             var board = [];
             for ( var i = 0; i < size; i++ ) {
                 board[i] = [];
                 for (var j = 0; j < size; j++) {
-                    board[i][j] = $('<div>' + 'drop here!' + '</div>').data( 'coord', [i, j] ).appendTo( '#cardSlots' ).droppable( {
-                        accept: '#cardPile div',
-                        hoverClass: 'hovered',
-                        drop: handleCardDrop
-                    } );
+                    board[i][j] = $('<div>' + 'drop here!' + '</div>').data( 'coord', [i, j] )
+                        .appendTo( '#cardSlots' )
+                        .droppable( {
+                            accept: '#cardPile div',
+                            hoverClass: 'hovered',
+                            drop: handleCardDrop
+                    });
                 }
             }
+
         }
 
         function handleCardDrop( event, ui ) {
@@ -54,6 +60,7 @@
             $(this).droppable( 'disable' );
             drag.position( { of: $(this), my: 'left top', at: 'left top' } );
             drag.draggable( 'option', 'revert', false );
+            ui.draggable.draggable( 'option', 'revert', false );
         }
 
     </script>
@@ -63,7 +70,7 @@
 
 <div id="content">
 
-    <div id="successMessage" style="text-align: center;">
+    <div id="successMessage">
         <button onclick="init()">CLEAN</button>
     </div>
     <br>
