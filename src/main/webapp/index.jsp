@@ -63,8 +63,8 @@
 
 <div id="content">
 
-    <div id="successMessage">
-        <button onclick="init()">To clean</button>
+    <div id="successMessage" style="text-align: center;">
+        <button onclick="init()">CLEAN</button>
     </div>
     <br>
 
